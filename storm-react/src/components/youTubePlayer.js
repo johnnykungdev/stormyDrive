@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-async function() {
+async function downloadYTCode() {
     const tag = document.createElement('script')
     tag.src = 'https://www.youtube.com/iframe_api'
     const firstScriptTag = document.getElementsByTagName('script')[0]
@@ -31,9 +31,32 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+    event.target.playVideo();
+    event.target.mute();
+}
+
+// 5. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+var done = false;
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING && !done) {
+        setTimeout(stopVideo, 6000);
+        done = true;
+    }
+}
+function stopVideo() {
+    player.stopVideo();
+}
+
 function YoutubePlayer() {  
     useEffect(() => {
-        
+        if (window.YT) {
+            downloadYTCode()
+            .then
+        }
     })
     const playerEL = useRef(null)
     return (
