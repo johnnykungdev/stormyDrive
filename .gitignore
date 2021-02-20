@@ -1,0 +1,17 @@
+/node_modules
+/storm-react/node_modules
+/storm-react/build
+/storm-react/coverage
+/storm-react/.DS_Store
+/storm-react/.env.local
+/storm-react/.env.development.local
+/storm-react/.env.test.local
+/storm-react/.env.production.local
+
+/storm-react/npm-debug.log*
+/storm-react/yarn-debug.log*
+/storm-react/yarn-error.log*
+/storm-react/.pnp
+/storm-react/.pnp.js
+
+/.DS_Store
