@@ -11,7 +11,19 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-function createUser(email, password) {
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./stormhack-14c1d-firebase-adminsdk-gbrtg-4c4538b6e8.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://stormhack-14c1d-default-rtdb.firebaseio.com"
+});
+
+const db = admin.firestore();
+
+
+function createUser(username, email, password) {
 
     console.log("received email: ", email);
 
@@ -19,15 +31,15 @@ function createUser(email, password) {
         .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
-
-
         })
         .catch((error) => {
-            console.log("********* FIREBASE ERROR **********")
+            console.log(error.message);
             return error.message;
             // ..
         });
-
+        saveChat("1", "2", "3");
+    // saveChat("notVancouver", "test", "testuid").then(()=>{})
+    //     .catch((error) => {console.log(error.message)});
 
 }
 
@@ -61,6 +73,22 @@ function checkSignedIn() {
     });
 }
 
+
+
+async function saveChat(district, message, userID) {
+    const uid = auth().currentUser.uid;
+    const data = {
+        message : message,
+        timestamp : admin.firestore.FieldValue.serverTimestamp(),
+        user_id : userID
+    }
+    const dbRef = db.collection("district").doc(district).collection('chats').doc();
+
+    await dbRef.set(data);
+    // await db.collection("userssss").add({
+    //     first: "no"
+    // })
+}
 
 function signOut() {
     firebase.auth().signOut().then(() => {
