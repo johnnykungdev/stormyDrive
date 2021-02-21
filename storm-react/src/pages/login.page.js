@@ -1,22 +1,42 @@
 import React, { useState } from 'react'
+import classes from './login.module.scss'
+import { Redirect } from 'react-router-dom'
+
+import { auth } from '../utils/firebase'
 
 import api_url from '../utils/api_url'
 
-function LoginPage() {
+function LoginPage(props) {
+    console.log(props)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    console.log("login")
-    const login = () => {
-        fetch(`${api_url}/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({email, password})
-        })
-        .then(resp => resp.json())
-        .then(data => localStorage.setItem(data.to))
-        .catch(error => console.log(error))
+    const [isSignedIn, setIsSignedIn] = useState(false)
+
+    const login = async (e) => {
+        e.preventDefault()
+        try {
+            const result = await auth().signInWithEmailAndPassword(email, password)
+            console.log(result)
+        } catch(e) {
+
+        }
+
+
+        // console.log(email, password)
+        // e.preventDefault()
+        // fetch(`${api_url}/user/login`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({email, password})
+        // })
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     localStorage.setItem("token", data.stsTokenManager.accessToken)
+        //     setIsSignedIn(true)
+        // })
+        // .catch(error => console.log(error))
     }
 
     const emailChangeHandler = (e) => {
@@ -27,12 +47,17 @@ function LoginPage() {
         setPassword(e.target.value)
     }
 
+    if (isSignedIn) {
+        return <Redirect to="/" />
+    }
+
     return (
         <div>
             <form>
+                <h2>Login</h2>
                 <input type="email" value={email} onChange={(e) => emailChangeHandler(e)}/>
                 <input type="password" value={password} onChange={(e) => passwordChangeHandler(e)}/>
-                <button>login</button>
+                <button onClick={(e) => login(e)}>login</button>
             </form>
         </div>
     )

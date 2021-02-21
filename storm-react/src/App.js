@@ -9,7 +9,7 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <Route exact path="/" render={() => <Main />}/>
-                <Route path="/login" render={() => <Login />} />
+                <Route path="/login" render={(router) => <Login router={router}/>} />
             </div>
         </BrowserRouter>
 
