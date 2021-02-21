@@ -5,10 +5,10 @@ import { Redirect } from 'react-router-dom'
 import { auth } from '../utils/firebase'
 
 import api_url from '../utils/api_url'
-import { db } from '.'
+import { db } from '../utils/firebase'
 
 function LoginPage(props) {
-    console.log(props)
+    // console.log(props)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -22,7 +22,6 @@ function LoginPage(props) {
                 userId: result.user.uid,
                 userName: ""
             })
-            await d
         } catch(error) {
             console.log(error)
         }
@@ -47,6 +46,7 @@ function LoginPage(props) {
                 <input type="email" value={email} onChange={(e) => emailChangeHandler(e)}/>
                 <input type="password" value={password} onChange={(e) => passwordChangeHandler(e)}/>
                 <button onClick={(e) => login(e)}>login</button>
+                <p id={'error_msg'}></p>
             </form>
         </div>
     )
