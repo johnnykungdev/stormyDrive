@@ -75,6 +75,7 @@ function ChatRoom(props) {
         setInputMessage("")
     }
 
+    let windowHeight = window.innerHeight;
     return (
         <div className={classes.ChatRoom}>
             <div className={classes.Messages} style={{overflowY: "auto"}}>
