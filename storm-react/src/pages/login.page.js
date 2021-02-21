@@ -5,19 +5,24 @@ import { Redirect } from 'react-router-dom'
 import { auth } from '../utils/firebase'
 
 import api_url from '../utils/api_url'
+import { db } from '.'
 
 function LoginPage(props) {
     console.log(props)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isSignedIn, setIsSignedIn] = useState(false)
 
     const login = async (e) => {
         e.preventDefault()
         try {
             const result = await auth().signInWithEmailAndPassword(email, password)
             console.log(result.user)
-            setIsSignedIn(true)
+            props.setUser({
+                authed: true,
+                userId: result.user.uid,
+                userName: ""
+            })
+            await d
         } catch(error) {
             console.log(error)
         }
@@ -31,7 +36,7 @@ function LoginPage(props) {
         setPassword(e.target.value)
     }
 
-    if (isSignedIn) {
+    if (props.user.authed) {
         return <Redirect to="/" />
     }
 

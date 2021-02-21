@@ -45,16 +45,15 @@ function createUser(username, email, password) {
 
 
 function signInExisting(email, password) {
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    return new Promise((res, rej) => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in
-            var user = userCredential.user;
-            // ...
+            res(userCredential.user)
         })
         .catch((error) => {
-            var errorCode = error.code;
-            return error.message;
-        });
+            rej(error.message)
+        })
+    })
 
 }
 
