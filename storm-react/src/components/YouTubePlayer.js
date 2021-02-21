@@ -7,7 +7,7 @@ function onPlayerReady(event) {
     event.target.mute();
 }
 
-function YoutubePlayer(props) { 
+function YouTubePlayer(props) {
     const [ ytLoaded, setYTLoaded ] = useState(false)
     window.onYouTubeIframeAPIReady = () => {
         console.log(window.YT)
@@ -58,4 +58,4 @@ function YoutubePlayer(props) {
     )
 }
 
-export default YoutubePlayer
+export default YouTubePlayer
