@@ -7,16 +7,14 @@ function onPlayerReady(event) {
     event.target.mute();
 }
 
-function YoutubePlayer() { 
+function YoutubePlayer(props) { 
     const [ ytLoaded, setYTLoaded ] = useState(false)
     window.onYouTubeIframeAPIReady = () => {
         console.log(window.YT)
         setYTLoaded(true)
     }
     const playerEl = useRef(null) 
-    console.log('render')
     useEffect(() => {
-        console.log('useEffect')
         function downloadYT() {
             const tag = document.createElement('script')
             tag.src = "https://www.youtube.com/iframe_api";
@@ -45,7 +43,7 @@ function YoutubePlayer() {
                 },
                 height: window.innerHeight / 3,
                 width: "100%",
-                videoId: 'svR_pijHljw',
+                videoId: props.video_id,
                 events: {
                     'onReady': onPlayerReady,
                     // 'onStateChange': onPlayerStateChange

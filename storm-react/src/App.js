@@ -10,9 +10,9 @@ function App() {
             <div className="App">
                 <Route exact path="/" render={() => <Main />}/>
                 <Route path="/login" render={(router) => <Login router={router}/>} />
+                <Route path="/video" render={(router) => <VideoPage router={router}/>} />
             </div>
         </BrowserRouter>
-
     );
 }
 

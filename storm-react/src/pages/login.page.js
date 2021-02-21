@@ -16,27 +16,11 @@ function LoginPage(props) {
         e.preventDefault()
         try {
             const result = await auth().signInWithEmailAndPassword(email, password)
-            console.log(result)
-        } catch(e) {
-
+            console.log(result.user)
+            setIsSignedIn(true)
+        } catch(error) {
+            console.log(error)
         }
-
-
-        // console.log(email, password)
-        // e.preventDefault()
-        // fetch(`${api_url}/user/login`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({email, password})
-        // })
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     localStorage.setItem("token", data.stsTokenManager.accessToken)
-        //     setIsSignedIn(true)
-        // })
-        // .catch(error => console.log(error))
     }
 
     const emailChangeHandler = (e) => {

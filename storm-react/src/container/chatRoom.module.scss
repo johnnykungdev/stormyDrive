@@ -1,0 +1,32 @@
+.MyMsg {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 1px;
+    color: black;
+    text-align: right;
+
+    p {
+        display: inline-block;
+        background-color: white;
+        margin: 0;
+        border-radius: 5px;
+        padding: 6px;
+    }
+}
+
+.OthersMsg {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 1px;
+    color: white;
+    text-align: left;
+
+    p {
+        display: inline-block;
+        background-color: rgb(152, 152, 255);
+        margin: 0;
+        border-radius: 5px;
+        padding: 6px;
+    }
+}
+
