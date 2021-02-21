@@ -116,21 +116,21 @@ async function saveChat(district, message) {
 
 async function readLatestMessage(district) {
     const doc = db.collection("district").doc(district).collection("chats");
-    doc.onSnapshot()
+    doc.onSnapshot((docSnapshot) => {
+        let message = [];
+        docSnapshot.docChanges().forEach(change => {
+            if (change.type === 'added') {
+                message.push(change.doc.data());
+            // return change.doc.data();
+            }
+            console.log(message)
+        });
+    });
 
 }
 
 
-    // doc.onSnapshot((docSnapshot) => {
-    //     let message = [];
-    //     docSnapshot.docChanges().forEach(change => {
-    //         if (change.type === 'added') {
-    //             message.push(change.doc.data());
-    //         // return change.doc.data();
-    //         }
-    //         console.log(message)
-    //     });
-    // });
+
 
 
 // {
