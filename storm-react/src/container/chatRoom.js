@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { db } from '../utils/firebase'
+import React, {useEffect, useState} from 'react'
+import {db} from '../utils/firebase'
 
 import classes from './chatRoom.module.scss'
 
@@ -26,19 +26,20 @@ function ChatRoom(props) {
                     })
                     setChats(currentChats)
                 });
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
             }
         }
+
         getNewChat("Vancouver")
     }, [])
-    
+
     let chatDivs = []
-    if(chats) {
+    if (chats) {
         console.log('chats', chats)
         chats.forEach((msg) => {
             if (msg.user_id === "LBYEp7sp6ge09AciCjANfZwiLwh2") {
-                chatDivs.push (
+                chatDivs.push(
                     <div key={msg.timestamp} className={classes.MyMsg}>
                         <p>
                             {msg.message}
@@ -46,10 +47,10 @@ function ChatRoom(props) {
                     </div>
                 )
             } else {
-                chatDivs.push (
+                chatDivs.push(
                     <div key={msg.timestamp} className={classes.OthersMsg}>
                         <p>
-                        {msg.message}
+                            {msg.message}
                         </p>
                     </div>
                 )
@@ -61,12 +62,12 @@ function ChatRoom(props) {
     async function saveChat(e, district, message) {
         e.preventDefault()
         const userID = "LBYEp7sp6ge09AciCjANfZwiLwh2"
-        
+
         // const userdb = db.collection('user').doc(userID)
         // const doc = await userdb.get()
         // const docJson = doc.data()
         // let username = docJson['username']
-    
+
         const data = {
             message: message,
             timestamp: new Date().getTime(),
@@ -74,18 +75,24 @@ function ChatRoom(props) {
             // username: username
         }
         const dbRef = db.collection("district").doc(district).collection('chats').doc();
-    
+
         await dbRef.set(data);
         setInputMessage("")
     }
 
     return (
-        <div className={classes.ChatRoom}>
-            {chatDivs}
-            <input 
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}/>
-            <button onClick={(e) => saveChat(e, "Vancouver", inputMessage)}>enter</button>
+        <div>
+            <div className={classes.ChatRoom} style={{overflowY: "auto", height: "25em"}}>
+                {chatDivs}
+
+            </div>
+            <div>
+                <input
+                    value={inputMessage}
+                    onChange={(e) => setInputMessage(e.target.value)}/>
+                <button onClick={(e) => saveChat(e, "Vancouver", inputMessage)}>enter</button>
+
+            </div>
         </div>
     )
 }
