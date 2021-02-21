@@ -1,3 +1,17 @@
+.ChatRoom {
+    width: 95%;
+    padding: 15px;
+    display: grid;
+    grid-template-rows: 300px 25px;
+}
+
+.Messages {
+    background: rgba(208, 250, 248, 0.603);
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 .MyMsg {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -23,10 +37,9 @@
 
     p {
         display: inline-block;
-        background-color: rgb(152, 152, 255);
+        background-color: rgb(255, 145, 55);
         margin: 0;
         border-radius: 5px;
         padding: 6px;
     }
 }
-

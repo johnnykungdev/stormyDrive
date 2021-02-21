@@ -47,23 +47,6 @@ function LoginPage(props) {
         } catch(e) {
             console.log(e)
         }
-
-
-        // console.log(email, password)
-        // e.preventDefault()
-        // fetch(`${api_url}/user/login`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({email, password})
-        // })
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     localStorage.setItem("token", data.stsTokenManager.accessToken)
-        //     setIsSignedIn(true)
-        // })
-        // .catch(error => console.log(error))
     }
 
     const emailChangeHandler = (e) => {
@@ -77,16 +60,11 @@ function LoginPage(props) {
         setUsername(e.target.value)
     }
 
-    if (isSignedUp) {
-        // console.log(isSignedUp)
-        return <Redirect to="/login" />
-    }
-
     return (
         <div>
             <form>
-                <h2>Login</h2>
-                <label>Email   :</label>
+                <h2>Sign up</h2>
+                <label>Email:</label>
                 <input type="email" value={email} placeholder={"Email"} onChange={(e) => emailChangeHandler(e)}/>
                 <label>Username</label>
                 <input type="text" value={username} placeholder={"Username"} onChange={(e) => usernameChangeHandler(e)}/>

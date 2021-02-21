@@ -39,7 +39,7 @@ function ChatRoom(props) {
     if(chats) {
         console.log('chats', chats)
         chats.forEach((msg) => {
-            if (msg.user_id === "LBYEp7sp6ge09AciCjANfZwiLwh2") {
+            if (msg.user_id === userId) {
                 chatDivs.push (
                     <div key={msg.timestamp} className={classes.MyMsg}>
                         <p>
@@ -62,20 +62,12 @@ function ChatRoom(props) {
 
     async function saveChat(e, district, message) {
         e.preventDefault()
-        // const userID = "LBYEp7sp6ge09AciCjANfZwiLwh2"
-        
-        // const userdb = db.collection('user').doc(userID)
-        // const doc = await userdb.get()
-        // const docJson = doc.data()
-        // let username = docJson['username']
-    
         const data = {
             message: message,
             timestamp: new Date().getTime(),
             user_id: userId,
             userName
         }
-        console.log(data)
         const dbRef = db.collection("district").doc(district).collection('chats').doc();
     
         await dbRef.set(data);
@@ -84,11 +76,18 @@ function ChatRoom(props) {
 
     return (
         <div className={classes.ChatRoom}>
-            {chatDivs}
-            <input 
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}/>
-            <button onClick={(e) => saveChat(e, "Vancouver", inputMessage)}>enter</button>
+            <div className={classes.Messages}>
+                {chatDivs}
+            </div>
+            <div className={classes.InputBar}>
+                <input 
+                    className={classes.chatInput}
+                    value={inputMessage}
+                    onChange={(e) => setInputMessage(e.target.value)}/>
+                <button 
+                    className={classes.enterMessage}
+                    onClick={(e) => saveChat(e, "Vancouver", inputMessage)}>enter</button>
+            </div>
         </div>
     )
 }

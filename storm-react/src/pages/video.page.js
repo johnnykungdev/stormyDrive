@@ -19,7 +19,7 @@ function Video(props) {
                 <YoutubePlayer video_id={video_id}/>
             </div>
             <div>
-                <iframe class={classes.RadioPlayer} src={"https://tunein.com/embed/player/s55425/?autoplay=true"} scrolling={"no"} frameBorder={"no"} title="radio"></iframe>
+                <iframe class={classes.RadioPlayer} src={"https://tunein.com/embed/player/s55425/?autoplay=true"} scrolling={"no"} frameBorder={"no"} title="radio" autoplay></iframe>
             </div>
             <div >
                 <ChatRoom user={props.user} />

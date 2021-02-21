@@ -9,9 +9,9 @@ import VideoPage from './pages/video.page'
 
 function App() {
     const [user, setUser] = useState({
-        authed: false,
-        userId: "",
-        userName: ""
+        authed: true,
+        userId: "qweqwe",
+        userName: "asdqw"
     })
     return (
         <BrowserRouter>
