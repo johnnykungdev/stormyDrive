@@ -31,13 +31,13 @@ function createUser(username, email, password) {
         .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
+            saveUsername(user.uid, username);
         })
         .catch((error) => {
             console.log(error.message);
             return error.message;
             // ..
         });
-        saveChat("1", "2", "3");
     // saveChat("notVancouver", "test", "testuid").then(()=>{})
     //     .catch((error) => {console.log(error.message)});
 
@@ -49,12 +49,12 @@ function signInExisting(email, password) {
         .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
-            // ...
         })
         .catch((error) => {
             var errorCode = error.code;
             return error.message;
         });
+
 
 }
 
@@ -75,26 +75,89 @@ function checkSignedIn() {
 
 async function saveUsername(uID, username) {
     const data = {
-        user_id : uID,
-        username : username
+        user_id: uID,
+        username: username
     }
-    const dbRef = db.collection('user').doc();
+    const dbRef = db.collection('user').doc(uID);
     await dbRef.set(data);
 }
 
-async function saveChat(district, message, userID) {
-    const uid = auth().currentUser.uid;
+async function testRunner() {
+    const dbRef = db.collection("district").doc("Vancouver").collection("chats").doc();
     const data = {
-        message : message,
-        timestamp : admin.firestore.FieldValue.serverTimestamp(),
-        user_id : userID
+        message: "1",
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+        user_id: "testuser"
+    }
+    await dbRef.set(data);
+    console.log("running testRunner");
+}
+
+async function saveChat(district, message) {
+    const userID = firebase.auth().currentUser.uid;
+
+    const userdb = db.collection("user").doc(userID);
+    const doc = await userdb.get();
+    const docJson = doc.data();
+    let username = docJson['username'];
+
+
+    const data = {
+        message: message,
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+        user_id: userID,
+        username: username
     }
     const dbRef = db.collection("district").doc(district).collection('chats').doc();
 
     await dbRef.set(data);
-    // await db.collection("userssss").add({
-    //     first: "no"
-    // })
+
+}
+
+async function readLatestMessage(district) {
+    const doc = db.collection("district").doc(district).collection("chats");
+    doc.onSnapshot()
+
+}
+
+
+    // doc.onSnapshot((docSnapshot) => {
+    //     let message = [];
+    //     docSnapshot.docChanges().forEach(change => {
+    //         if (change.type === 'added') {
+    //             message.push(change.doc.data());
+    //         // return change.doc.data();
+    //         }
+    //         console.log(message)
+    //     });
+    // });
+
+
+// {
+//     const data = docSnapshot.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data(),
+//     }));
+//     console.log("****", data);
+// }
+
+async function readAllMessages(district) {
+    const dbRef = db.collection("district").doc('Vancouver').collection("chats");
+    const snapshot = await dbRef.get();
+    if (snapshot.empty) {
+        console.log("No comments");
+        return;
+    }
+    snapshot.forEach(doc => {
+        let data = doc.data();
+        console.log(data['message']);
+
+    })
+
+}
+
+function getID() {
+    console.log(firebase.auth().currentUser.uid);
 }
 
 function signOut() {
@@ -106,4 +169,22 @@ function signOut() {
     res.end("signed out");
 }
 
-module.exports = {createUser, signInExisting, checkSignedIn, signOut}
+async function getURL(district) {
+    dbRef = db.collection("district").doc(district);
+    const doc = await dbRef.get();
+    let docJson = doc.data();
+    console.log("got URL: ", docJson['url']);
+    return docJson['url'];
+}
+
+module.exports = {
+    createUser,
+    signInExisting,
+    checkSignedIn,
+    signOut,
+    getID,
+    testRunner,
+    readAllMessages,
+    readLatestMessage,
+    getURL
+}
