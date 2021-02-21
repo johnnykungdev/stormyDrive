@@ -1,13 +1,13 @@
 import React from 'react'
-import YouTubePlayer from '../components/youTubePlayer'
+import YoutubePlayer from '../components/YoutubePlayer'
 
 function Video() {
-
+    
 
     return (
         <div>
             <div >
-                
+                <YoutubePlayer />
             </div>
             <div >
 

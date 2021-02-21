@@ -37,7 +37,7 @@ function createUser(username, email, password) {
             return error.message;
             // ..
         });
-        saveChat("1", "2", "3");
+        // saveChat("1", "2", "3");
     // saveChat("notVancouver", "test", "testuid").then(()=>{})
     //     .catch((error) => {console.log(error.message)});
 
