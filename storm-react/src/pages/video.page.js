@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import YoutubePlayer from '../components/YouTubePlayer'
+import YoutubePlayer from '../components/YoutubePlayer'
 import spotifyAuth from '../utils/spotifyAuth'
 import ChatRoom from '../container/chatRoom'
 
@@ -34,7 +34,7 @@ function Video(props) {
                 <p>Radio Selector</p>
             </div>
             <div>
-                <input type="range" min="0" max="4" onChange={(e) => {
+                <input className={classes.progressbar}type="range" min="0" max="4" onChange={(e) => {
 
                         let val = e.target.value;
                         if (val == 1) {
