@@ -4,8 +4,10 @@ import { db } from '../utils/firebase'
 import classes from './chatRoom.module.scss'
 
 function ChatRoom(props) {
+    console.log(props)
+    const { userName, userId } = props.user
     const [chats, setChats] = useState([])
-    const [users, setUsers] = useState([])
+
     const [nickName, setNickName] = useState([])
     const [roomName, setRoomname] = useState("")
     const [readError, setReadError] = useState(null)
@@ -60,7 +62,7 @@ function ChatRoom(props) {
 
     async function saveChat(e, district, message) {
         e.preventDefault()
-        const userID = "LBYEp7sp6ge09AciCjANfZwiLwh2"
+        // const userID = "LBYEp7sp6ge09AciCjANfZwiLwh2"
         
         // const userdb = db.collection('user').doc(userID)
         // const doc = await userdb.get()
@@ -70,9 +72,10 @@ function ChatRoom(props) {
         const data = {
             message: message,
             timestamp: new Date().getTime(),
-            user_id: userID,
-            // username: username
+            user_id: userId,
+            userName
         }
+        console.log(data)
         const dbRef = db.collection("district").doc(district).collection('chats').doc();
     
         await dbRef.set(data);

@@ -6,7 +6,7 @@ import ChatRoom from '../container/chatRoom'
 import classes from './video.module.scss'
 
 function Video(props) {
-    console.log(props.router)
+    console.log(props.user)
     const video_id = props.router.location.search.replace("?v_id=", "")
     console.log(video_id)
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -19,10 +19,10 @@ function Video(props) {
                 <YoutubePlayer video_id={video_id}/>
             </div>
             <div>
-                <iframe class={classes.RadioPlayer} src={"https://tunein.com/embed/player/s55425/?autoplay=true%22%7D"} scrolling={"no"} frameBorder={"no"} title="radio"></iframe>
+                <iframe class={classes.RadioPlayer} src={"https://tunein.com/embed/player/s55425/?autoplay=true"} scrolling={"no"} frameBorder={"no"} title="radio"></iframe>
             </div>
             <div >
-                <ChatRoom />
+                <ChatRoom user={props.user} />
             </div>
         </div>
     )

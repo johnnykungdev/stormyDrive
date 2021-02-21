@@ -1,5 +1,6 @@
 import { Route, BrowserRouter } from 'react-router-dom'
 import {useState} from 'react'
+import PrivateRoute from './components/PrivateRoute/privateRoute'
 
 import Main from './pages/main.page'
 import Login from './pages/login.page'
@@ -15,10 +16,15 @@ function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <Route exact path="/" render={() => <Main />}/>
+                <PrivateRoute authed={user.authed} path="/">
+                    <Main />
+                </PrivateRoute>
                 <Route path="/login" render={(router) => <Login router={router} setUser={setUser} user={user} />} />
-                <Route path="/signup" render={(router) => <Login router={router}/>} />
-                <Route path="/video" render={(router) => <VideoPage router={router}/>} />
+                <Route path="/signup" render={(router) => <Signup router={router}/>} />
+                <PrivateRoute authed={user.authed}>
+                    <Route path="/video" 
+                        render={(router) => <VideoPage router={router} user={user}/>} />
+                </PrivateRoute>
             </div>
         </BrowserRouter>
     );

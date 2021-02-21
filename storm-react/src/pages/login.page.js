@@ -17,7 +17,7 @@ function LoginPage(props) {
         try {
             const userResult = await auth().signInWithEmailAndPassword(email, password)
             // await db.collection('user')
-
+            
             props.setUser({
                 authed: true,
                 userId: userResult.user.uid,
