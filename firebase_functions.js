@@ -73,7 +73,14 @@ function checkSignedIn() {
     });
 }
 
-
+async function saveUsername(uID, username) {
+    const data = {
+        user_id : uID,
+        username : username
+    }
+    const dbRef = db.collection('user').doc();
+    await dbRef.set(data);
+}
 
 async function saveChat(district, message, userID) {
     const uid = auth().currentUser.uid;
