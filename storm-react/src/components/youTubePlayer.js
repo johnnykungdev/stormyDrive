@@ -40,11 +40,12 @@ function YoutubePlayer() {
                     iv_load_policy : 3,
                     autohide : 0,
                     modestbranding : 1,
-                    playsinline : 0
+                    playsinline : 0,
+                    allowfullscreen: 1
                 },
-                // height: window.innerHeight,
-                width: window.innerWidth,
-                videoId: 'VavFXix6J2s',
+                height: window.innerHeight / 3,
+                width: "100%",
+                videoId: 'svR_pijHljw',
                 events: {
                     'onReady': onPlayerReady,
                     // 'onStateChange': onPlayerStateChange

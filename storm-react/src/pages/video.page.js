@@ -1,8 +1,11 @@
 import React from 'react'
 import YoutubePlayer from '../components/YoutubePlayer'
+import spotifyAuth from '../utils/spotifyAuth'
 
 function Video() {
-    
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        console.log('spotify ready')
+    }
 
     return (
         <div>
@@ -10,7 +13,6 @@ function Video() {
                 <YoutubePlayer />
             </div>
             <div >
-
             </div>
             <div >
 
