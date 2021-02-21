@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { db } from '../utils/firebase'
+import React, {useEffect, useState} from 'react'
+import {db} from '../utils/firebase'
 
 import classes from './chatRoom.module.scss'
 
@@ -28,15 +28,16 @@ function ChatRoom(props) {
                     })
                     setChats(currentChats)
                 });
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
             }
         }
+
         getNewChat("Vancouver")
     }, [])
-    
+
     let chatDivs = []
-    if(chats) {
+    if (chats) {
         console.log('chats', chats)
         chats.forEach((msg) => {
             if (msg.user_id === userId) {
@@ -48,10 +49,10 @@ function ChatRoom(props) {
                     </div>
                 )
             } else {
-                chatDivs.push (
+                chatDivs.push(
                     <div key={msg.timestamp} className={classes.OthersMsg}>
                         <p>
-                        {msg.message}
+                            {msg.message}
                         </p>
                     </div>
                 )
@@ -69,14 +70,14 @@ function ChatRoom(props) {
             userName
         }
         const dbRef = db.collection("district").doc(district).collection('chats').doc();
-    
+
         await dbRef.set(data);
         setInputMessage("")
     }
 
     return (
         <div className={classes.ChatRoom}>
-            <div className={classes.Messages}>
+            <div className={classes.Messages} style={{overflowY: "auto"}}>
                 {chatDivs}
             </div>
             <div className={classes.InputBar}>

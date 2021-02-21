@@ -9,21 +9,23 @@ import VideoPage from './pages/video.page'
 
 function App() {
     const [user, setUser] = useState({
-        authed: true,
-        userId: "qweqwe",
-        userName: "asdqw"
+        authed: false,
+        userId: "",
+        userName: ""
     })
     return (
         <BrowserRouter>
             <div className="App">
-                <PrivateRoute authed={user.authed} path="/">
-                    <Main />
-                </PrivateRoute>
                 <Route path="/login" render={(router) => <Login router={router} setUser={setUser} user={user} />} />
                 <Route path="/signup" render={(router) => <Signup router={router}/>} />
-                <PrivateRoute authed={user.authed}>
+
+                <PrivateRoute authed={user.authed} path="/video">
                     <Route path="/video" 
                         render={(router) => <VideoPage router={router} user={user}/>} />
+                </PrivateRoute>
+                <PrivateRoute exact authed={user.authed} path="/">
+                    <Route exact path="/"
+                            render={(router) => <Main router={router}/>} />
                 </PrivateRoute>
             </div>
         </BrowserRouter>

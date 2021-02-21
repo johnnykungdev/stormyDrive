@@ -14,10 +14,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static("public"))
 app.use(apiRouter)
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"))
-})
+app.get('*', (req, res) => {
+    console.log("send file");
+    res.sendFile(path.join(__dirname + "/public/index.html"));
+});
 
-app.listen(8000, () => {
+app.listen(process.env.PORT, () => {
     console.log('listen on port 8000')
 })
