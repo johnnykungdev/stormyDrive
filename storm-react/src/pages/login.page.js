@@ -15,11 +15,12 @@ function LoginPage(props) {
     const login = async (e) => {
         e.preventDefault()
         try {
-            const result = await auth().signInWithEmailAndPassword(email, password)
-            console.log(result.user)
+            const userResult = await auth().signInWithEmailAndPassword(email, password)
+            // await db.collection('user')
+
             props.setUser({
                 authed: true,
-                userId: result.user.uid,
+                userId: userResult.user.uid,
                 userName: ""
             })
         } catch(error) {

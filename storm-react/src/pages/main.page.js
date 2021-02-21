@@ -20,7 +20,7 @@ function Main() {
         
             <section className={classes.featuredStream}>
                 <Link to="/video?v_id=6tyFAtgy4JA">
-                    <iframe width="90%" height="345" src="https://www.youtube.com/embed/6tyFAtgy4JA" title="vancouver"></iframe>
+                    <iframe className={classes.mainPageVid} width="90%" height="345" src="https://www.youtube.com/embed/6tyFAtgy4JA" title="vancouver"></iframe>
                 </Link>
                 
             </section>
@@ -29,11 +29,11 @@ function Main() {
             
             <section className={classes.streams}>
                 <Link to="/video?v_id=svR_pijHljw">
-                    <iframe width="80%" height="345" src="https://www.youtube.com/embed/svR_pijHljw" title="spain">
+                    <iframe className={classes.mainPageVid}  width="80%" height="345" src="https://www.youtube.com/embed/svR_pijHljw" title="spain">
                     </iframe>
                 </Link>
                 <Link to="/video?v_id=4xWDtN6nIlE">
-                    <iframe width="80%" height="345" src="https://www.youtube.com/embed/4xWDtN6nIlE" title="whatever"></iframe>
+                    <iframe className={classes.mainPageVid}  width="80%" height="345" src="https://www.youtube.com/embed/4xWDtN6nIlE" title="whatever"></iframe>
                 </Link>
             </section>
         
