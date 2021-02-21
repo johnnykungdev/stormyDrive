@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FirebaseTest</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<input id='email' name="email" type="text">
+<input id='username' name="username" type="text">
+<input id="password" name='password' type="password">
+<button id="submit-btn" onclick="createUser()" type="button" value="Submit">Submit</button>
+
+
+<!--<form id="formAddUser" name="adduser" method="post" action="adduser">-->
+<!--    <input id="inputUserName" type="text" placeholder="email" name="email" />-->
+<!--    <input id="inputUserEmail" type="text" placeholder="password" name="password" />-->
+<!--    <button id="btnSubmit" type="submit">Submit</button>-->
+<!--</form>-->
+</body>
+
+<script>
+    const xhttp = new XMLHttpRequest();
+
+    function createUser() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let username = document.getElementById("username").value;
+        xhttp.open("POST", "http://localhost:8000/createUser/?email=" + email + "&password=" + password + "&username=" + username, true);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+            console.log("xhttp ready");
+
+        }
+    }
+
+    // $(document).ready(function () {
+    //     var eml, pswd;
+    //     $("#submit-btn").click(function () {
+    //         eml = $("#email").val();
+    //         pswd = $("#password").val();
+    //         $.post("http://localhost:3000/createUser", {email: eml, password: pswd}, function (data) {
+    //             if (data === 'yes') {
+    //                 alert("login success");
+    //             }
+    //         });
+    //     });
+    // });
+</script>
+</html>
